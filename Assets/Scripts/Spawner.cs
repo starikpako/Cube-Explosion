@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [Header("Spawn Settings")]
+    [Header("Settings")]
     [SerializeField] private int _minClones = 2;
     [SerializeField] private int _maxClones = 6;
     [SerializeField] private float _scaleFactor = 0.5f;
@@ -16,7 +16,6 @@ public class Spawner : MonoBehaviour
 
         for (int i = 0; i < count; i++)
         {
- 
             Cube newCube = Instantiate(parentCube, parentCube.transform.position, Quaternion.identity);
 
             newCube.Initialize(
@@ -24,9 +23,16 @@ public class Spawner : MonoBehaviour
                 parentCube.transform.localScale * _scaleFactor
             );
 
+            newCube.SetColor(Random.ColorHSV());
+
             newCubes.Add(newCube);
         }
 
         return newCubes;
+    }
+
+    public void Despawn(Cube cube)
+    {
+        Destroy(cube.gameObject);
     }
 }

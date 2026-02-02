@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 1568865750}
   - component: {fileID: 1568865749}
   m_Layer: 0
-  m_Name: GemeManager
+  m_Name: GameManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1156,7 +1156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37d2b6bd2dfb38a438fd4bffc42cfc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameController
-  _inputHandler: {fileID: 1568865750}
+  _inputReader: {fileID: 1568865750}
   _spawner: {fileID: 1568865752}
   _exploder: {fileID: 1568865751}
 --- !u!114 &1568865750
@@ -1171,6 +1171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43c974597425ff408775f2b9b6912da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InputHandler
+  _interactionMouseButton: 0
 --- !u!114 &1568865751
 MonoBehaviour:
   m_ObjectHideFlags: 0

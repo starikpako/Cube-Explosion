@@ -9,7 +9,7 @@ public class Cube : MonoBehaviour
     private Renderer _renderer;
 
     public float SplitChance => _splitChance;
-    public Rigidbody Rigidbody => _rigidbody;
+    public Rigidbody CubeRigidbody => _rigidbody;
 
     private void Awake()
     {
@@ -21,7 +21,10 @@ public class Cube : MonoBehaviour
     {
         _splitChance = chance;
         transform.localScale = scale;
+    }
 
-        _renderer.material.color = Random.ColorHSV();
+    public void SetColor(Color color)
+    {
+        _renderer.material.color = color;
     }
 }

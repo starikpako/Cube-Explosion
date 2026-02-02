@@ -10,7 +10,7 @@ public class Exploder : MonoBehaviour
     {
         foreach (Cube cube in cubes)
         {
-            cube.Rigidbody.AddExplosionForce(_explosionForce, center, _explosionRadius);
+            cube.CubeRigidbody.AddExplosionForce(_explosionForce, center, _explosionRadius);
         }
     }
 }
