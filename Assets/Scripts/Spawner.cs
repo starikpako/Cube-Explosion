@@ -9,26 +9,26 @@ public class Spawner : MonoBehaviour
     [SerializeField] private float _scaleFactor = 0.5f;
     [SerializeField] private float _chanceFactor = 0.5f;
 
-    public List<Cube> SpawnClones(Cube parentCube)
+    public List<Cube> SpawnClones(Cube parent)
     {
-        List<Cube> newCubes = new List<Cube>();
+        List<Cube> clones = new List<Cube>();
         int count = Random.Range(_minClones, _maxClones + 1);
 
         for (int i = 0; i < count; i++)
         {
-            Cube newCube = Instantiate(parentCube, parentCube.transform.position, Quaternion.identity);
+            Cube clone = Instantiate(parent, parent.transform.position, Quaternion.identity);
 
-            newCube.Initialize(
-                parentCube.SplitChance * _chanceFactor,
-                parentCube.transform.localScale * _scaleFactor
+            clone.Initialize(
+                parent.SplitChance * _chanceFactor,
+                parent.transform.localScale * _scaleFactor
             );
 
-            newCube.SetColor(Random.ColorHSV());
+            clone.Renderer.material.color = Random.ColorHSV();
 
-            newCubes.Add(newCube);
+            clones.Add(clone);
         }
 
-        return newCubes;
+        return clones;
     }
 
     public void Despawn(Cube cube)

@@ -3,28 +3,20 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody), typeof(Renderer))]
 public class Cube : MonoBehaviour
 {
-    [SerializeField] private float _splitChance = 1.0f;
+    public Rigidbody Rigidbody { get; private set; }
+    public Renderer Renderer { get; private set; }
 
-    private Rigidbody _rigidbody;
-    private Renderer _renderer;
-
-    public float SplitChance => _splitChance;
-    public Rigidbody CubeRigidbody => _rigidbody;
+    public float SplitChance { get; private set; } = 1f;
 
     private void Awake()
     {
-        _rigidbody = GetComponent<Rigidbody>();
-        _renderer = GetComponent<Renderer>();
+        Rigidbody = GetComponent<Rigidbody>();
+        Renderer = GetComponent<Renderer>();
     }
 
-    public void Initialize(float chance, Vector3 scale)
+    public void Initialize(float splitChance, Vector3 scale)
     {
-        _splitChance = chance;
+        SplitChance = splitChance;
         transform.localScale = scale;
-    }
-
-    public void SetColor(Color color)
-    {
-        _renderer.material.color = color;
     }
 }

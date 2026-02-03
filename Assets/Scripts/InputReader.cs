@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class InputReader : MonoBehaviour
 {
-    [SerializeField] private int _interactionMouseButton = 0;
+    [SerializeField] private int _mouseButtonIndex = 0;
 
-    public event Action OnInteract;
+    public event Action<Vector2> Clicked;
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(_interactionMouseButton))
+        if (Input.GetMouseButtonDown(_mouseButtonIndex))
         {
-            OnInteract?.Invoke();
+            Clicked?.Invoke(Input.mousePosition);
         }
     }
 }
