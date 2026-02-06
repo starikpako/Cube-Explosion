@@ -2,21 +2,13 @@ using UnityEngine;
 
 public class ClickDistributor : MonoBehaviour
 {
-    [Header("Services")]
     [SerializeField] private InputReader _inputReader;
     [SerializeField] private Raycaster _raycaster;
     [SerializeField] private Spawner _spawner;
     [SerializeField] private Exploder _exploder;
 
-    private void OnEnable()
-    {
-        _inputReader.Clicked += OnClicked;
-    }
-
-    private void OnDisable()
-    {
-        _inputReader.Clicked -= OnClicked;
-    }
+    private void OnEnable() => _inputReader.Clicked += OnClicked;
+    private void OnDisable() => _inputReader.Clicked -= OnClicked;
 
     private void OnClicked(Vector2 screenPosition)
     {
@@ -24,18 +16,18 @@ public class ClickDistributor : MonoBehaviour
 
         if (hitCube != null)
         {
-            ProcessCube(hitCube);
-        }
-    }
+            if (Random.value <= hitCube.SplitChance)
+            {
+                var clones = _spawner.SpawnClones(hitCube);
 
-    private void ProcessCube(Cube cube)
-    {
-        if (Random.value <= cube.SplitChance)
-        {
-            var clones = _spawner.SpawnClones(cube);
-            _exploder.Explode(clones, cube.transform.position);
-        }
+                _exploder.ExplodeClones(clones, hitCube.transform.position);
+            }
+            else
+            {
+                _exploder.ExplodeSurroundings(hitCube.transform.position, hitCube.transform.localScale.x);
+            }
 
-        _spawner.Despawn(cube);
+            _spawner.Despawn(hitCube);
+        }
     }
 }
